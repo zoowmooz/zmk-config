@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2020 Pete Johanson
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+/dts-v1/;
+#include <nordic/nrf52840_qiaa.dtsi>
+#include "arduino_pro_micro_pins.dtsi"
+
+/ {
+	model = "nice!nano";
+	compatible = "nice,nano";
+
+	tpoint {
+		compatible = "zmk,track-point";
+		label = "TRACKPOINT";
+		io-channels = <&adc 0>,<&adc 5>;
+		output-ohms = <1000>;
+		full-ohms = <(1000 + 345)>;
+		power-gpios {
+		    label = "ADC_POWER";
+		    pin = <31>;
+		    flags = <0>;
+		    };
+		power-gpios = <&gpio0 31 0>;
+/*		power-gpios = <&gpio0 31 0x501>;		*/
+/*		power-gpios = <&gpio0 31 GPIO_OUTPUT_ACTIVE>;*/
+		/* 0x00000503 sense:0 drive:D0H1 pull:no pull input:disconnect dir:output*/
+		/*#define GPIO_OUTPUT             (1U << 9)*/
+		/*#define GPIO_OUTPUT_INIT_LOW    (1U << 10)*/
+	};
+};
